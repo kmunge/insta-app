@@ -1,0 +1,106 @@
+{% extends 'all_posts/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    {{block.super}}
+ 
+<div class="container main-container">
+    <div class="row">
+        <!-- side content -->
+        <div class="col-md-2 about-me about-side text-center hidden-xs">
+            {%for profile in user_pic%}
+            <img src="{{profile.profile_pic.url}}" width=200 class="profile-pic img-responsive center-block">
+            {% endfor %}
+                <h1>{{user}}</h1>
+                <div class="sidebar" style="padding-top:10px">
+                        <div class="heading" style="text-align:center; font-size: 20px;">
+                            Stories
+                        </div>
+                        <div class="content">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-light">Kartelo</li>
+                                <li class="list-group-item list-group-item-light">Rewell</li>
+                                <li class="list-group-item list-group-item-light">Oya-Oya</li>
+                                <li class="list-group-item list-group-item-light">Kevin</li>
+                                <li class="list-group-item list-group-item-light">Rich-kid</li>
+                            </ul>
+                        </div>
+                 </div>
+
+                <footer class="page-footer font-large" style="padding-top:15px">
+                    <!-- <div class="footer-copyright text-center py-3"> -->
+                        <p class="footer">About Us.Support.Press.API.Jobs.Privacy.</p> 
+                        <p class="footer">Terms.Directory.Profiles.Hashtags.Language</p>   
+                        <br> 
+                        <p class="footer">© 2019 INSTAGRAM </p> 
+                    <!-- </div> -->
+                </footer>
+        </div>
+        <!-- main content -->
+        <div class="col-md-10 col-sm-offset-3" style="padding-top:100px">
+                {% for image_item in image %}
+            <div class="row work-item-row">
+                    <div class="col-md-10 col-sm-offset-2 project" >
+                    <div class="card" style="width: 60rem;">
+                            <h2 style="margin-left:20px">{{image_item.profile}}</h2>
+                            <img src="{{image_item.image.url}}" class="img-responsive" alt="Image" style=" width:800px;height:400px;padding:0;"alt="">
+                            <div class="card-body">
+                                <i style="font-size:20px" class="far fa-heart"></i>
+                                <i style="font-size:20px" class="far fa-comment"></i>
+                                <i style="font-size:20px" class="fas fa-arrow-circle-up"></i>
+                                <h5 >{{image_item.image_name}}</h5>
+                                </p>{{image_item.image_caption}}</p>
+                                <p>{{image_item.publish_date}}</p>
+
+                                <!-- <a href="{% url 'comments' %}"></a> {{image_item.comments}} -->
+                                <div class="row">
+                                        {% autoescape on %}
+                                        {{image_item.post| safe}}
+                                       {% endautoescape %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                  <div class="col-md-8">
+                                    <div>
+                                      <p class="commentheader">Comments <i class="far fa-comments"></i></p>
+                                      <hr>
+                                      {%if comments%}
+                                      {%for comment in comments%}
+                                      {% if image_item.id is comment.image %}
+                                      <p style="margin-top:5%"> <i class="fas fa-quote-left"></i> {{comment.comment}} <i class="fas fa-quote-right"></i></p>
+                                      <i>By: {{comment.author}}</i>
+                                      <br>
+                                      {% endif %}
+                                      {%endfor%}
+                                      {%else%}
+                                      <p class="alert alert-info">Be the 1st to comment</p>
+                                      {%endif%}
+                                    </div>
+
+                                    <form class="" action="" method="post" style="margin-top:2em">
+                                      {%csrf_token%}
+                                      {% bootstrap_form form%}
+                                      <!-- <button class="btn btn-outline-default" type="submit" name="button">Comment</button> -->
+                                      <input type="hidden" name="id" value="{{image_item.id}}">
+                                    </form>
+                                  
+                        
+                                  </div>
+                            
+                                  <div class="col-md-2"></div>
+                              </div>
+                            </div>
+                        </div>
+            </div>
+        {% empty %}
+        <div class="row">
+                <h2 class="text-center">There is no Image yet!</h2>
+        </div>
+            {% endfor %}
+        </div> <!-- end main content -->
+    </div>
+
+</div>
+
+{% endblock %}
