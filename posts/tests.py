@@ -5,7 +5,7 @@ from .models import Profile, Image
 class ProfileTestClass(TestCase):
     # Set up method
     def setUp(self):
-        self.kevin = Profile(id = 132, profile_pic = "",bio = "I love traveling", userId = 1)
+        self.kevin = Profile(id = 132, profile_pic = "",bio = "I love trading btcs", userId = 1)
 
       # Testing instance
     def test_instance(self):
@@ -13,7 +13,7 @@ class ProfileTestClass(TestCase):
     
     def test_initialization(self):
         self.assertEqual(self.kevin.profile_pic,"")
-        self.assertEqual(self.kevin.bio, "I love traveling")
+        self.assertEqual(self.kevin.bio, "I love trading btcs")
         self.assertEqual(self.kevin.userId, 1)
 
         # Testing Save method
@@ -34,10 +34,10 @@ class ImageTestClass(TestCase):
     # Set up method
     def setUp(self):
         # Profile class test
-        self.kevin = Profile( bio = "I love traveling", userId = 1)
+        self.kevin = Profile( bio = "I love trading btcs", userId = 1)
 
         # Image class Test
-        self.image = Image(image = " ",image_name="nature goodness",image_caption = "", publish_date = "10/2/2019", poster_id = 2)
+        self.image = Image(image = " ",image_name="Juja finest",image_caption = "", publish_date = "25/6/2019", poster_id = 2)
         self.image.save_image()
 
 
