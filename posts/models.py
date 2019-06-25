@@ -42,7 +42,6 @@ class Image(models.Model):
     profile = models.ForeignKey(User,on_delete = models.CASCADE,null = True)
     poster_id=models.IntegerField(default=0)
 
-
     @classmethod
     def get_images(cls):
         image = cls.objects.all()
@@ -65,7 +64,6 @@ class Image(models.Model):
 
     class Meta:
         ordering = ['-id']
-
 
 class Comments(models.Model):
     image = models.IntegerField(default=0)
